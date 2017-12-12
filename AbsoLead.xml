@@ -1,0 +1,47 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"									
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"								
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">								
+									
+    <Script file="AbsoLead.lua"/>								
+									
+    <!--> ============================================================================================================== <-->									
+    <Frame name="AbsoLeadMainFrame">								
+        <Scripts>							
+            <OnLoad>AbsoLead_OnLoad(self)</OnLoad>						
+            <OnEvent>AbsoLead_OnEvent(self, event, ...)</OnEvent>						
+            <OnUpdate>AbsoLead_OnUpdate(self)</OnUpdate>						
+        </Scripts>
+                       				
+    </Frame>								
+    <Frame name="AbsoLeadFrame"> 
+        <Size>
+            <AbsDimension x="250" y="250"/>
+        </Size>
+        <Anchors>
+            <Anchor point="LEFT"/>
+        </Anchors>
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+            <BackgroundInsets>
+                <AbsInset left="11" right="12" top="12" bottom="11"/>
+            </BackgroundInsets>
+            <TileSize>
+                <AbsValue val="32"/>
+            </TileSize>
+            <EdgeSize>
+                <AbsValue val="32"/>
+            </EdgeSize>
+        </Backdrop>
+        <Frames>			
+            <Button name="AbsoLead_Button">
+                <Anchors>
+                    <Anchor point="CENTER"/>
+                </Anchors>
+            </Button>
+            <Button name="AbsoLead_Button1S">
+                <Anchors>
+                    <Anchor point="CENTER"/>
+                </Anchors>
+            </Button>
+        </Frames>        
+    </Frame>														
+</Ui>
