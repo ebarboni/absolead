@@ -15,8 +15,10 @@ function AbsoLead_DisplayEncounter(encounterID)
     local self = AbsoLeadEncounterJournal.encounter;
     AbsoLead_CleanUI();
     EJ_SelectEncounter(encounterID);
-    
-    self.overviewFrame.loreDescription:SetText("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaafqsdkfjqlsfkj qslkdfj qsldfkj qsldfkj sqldkfj ");
+    if (strat[encounterID]) then
+        --print("cool");
+        self.overviewFrame.loreDescription:SetText(strat[encounterID][0]);
+    end
 end
 
 function AbsoLeadEncounterJournalInstanceButton_OnClick(self)
@@ -80,6 +82,7 @@ function AbsoLead_DisplayInstance(instanceID)
         local  name, description, bossID, rootSectionID, link = EJ_GetEncounterInfoByIndex(j, instanceID)
         if (strat[bossID]) then
             -- print('--', encounterId, name)
+            --print("--description",description);
             bossButton = _G["AbsoLeadEncounterJournalBossButton"..j];
             if not bossButton then -- create a new header;
                 bossButton = CreateFrame("BUTTON","AbsoLeadEncounterJournalBossButton"..j, AbsoLeadEncounterJournal.encounter.bossesFrame, "EncounterBossButtonTemplate");
