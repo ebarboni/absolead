@@ -45,7 +45,8 @@ function AbsoLead_CleanUI()
     self.instance.loreBG:Hide();
     self.instance.loreScroll:Hide();
     --self.instance.loreBG:SetTexture(loreImage);
-    self.instance.loreBG:Hide()
+    self.instance.loreBG:Hide();
+    self.instance.titleBG:Hide();
 end
 function AbsoLead_DisplayInstance(instanceID)
     
@@ -55,11 +56,11 @@ function AbsoLead_DisplayInstance(instanceID)
     local iname, description, bgImage, _, loreImage, buttonImage, dungeonAreaMapID = EJ_GetInstanceInfo();
     self.instance.title:SetText(iname); 
     self.instance.titleBG:SetWidth(self.instance.title:GetStringWidth() + 80);
-    self.instance.loreBG:SetTexture(loreImage);
+    --self.instance.loreBG:SetTexture(loreImage);
     self.instance.loreBG:Show();   
     self.instance.loreScroll:Show();
     self.info.instanceTitle:SetText(iname);
-    
+    self.instance.titleBG:Show();
     self.instance.title:Show();
     self.instance.loreScroll.child.lore:SetText(description);
     local loreHeight = self.instance.loreScroll.child.lore:GetHeight();
