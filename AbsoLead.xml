@@ -4,23 +4,8 @@
 									
     <Script file="AbsoLead.lua"/>								
 									
-    <!--> ============================================================================================================== <-->									
-    <Frame name="AbsoLeadMainFrame">								
-       
-                       				
-    </Frame>	
-    <Frame name="EncounterDescriptionTemplate" virtual="true">
-        <Frames>
-            <SimpleHTML parentKey="Text" setAllPoints="true" inherits="InlineHyperlinkFrameTemplate">
-                <FontString inherits="GameFontBlack" justifyH="LEFT" justifyV="TOP">
-                    <Color r="0.25" g="0.1484375" b=".02" a="1"/>
-                </FontString>
-                <Scripts>
-                    <OnHyperlinkEnter function="EncounterJournal_OnHyperlinkEnter"/>
-                </Scripts>
-            </SimpleHTML>
-        </Frames>
-    </Frame>
+    <!--> ============================================================================================================== <-->								
+    
     <Texture name="_FilterButtonUp-Mid" file="Interface\EncounterJournal\UI-EncounterJournalTextures_Tile" virtual="true" horizTile="true" >
         <Size x="64" y="26"/>
         <TexCoords left="0.00000000" right="1.00000000" top="0.00195313" bottom="0.05273438"/>
@@ -348,7 +333,21 @@
         <Size x="327" y="30"/>
         <TexCoords left="0.359375" right="0.99609375" top="0.8525390625" bottom="0.880859375"/>
     </Texture>
-    <Button name="EncounterCreatureButtonTemplate" motionScriptsWhileDisabled="true" virtual="true" hidden="true">
+    <Frame name="AbsoLeadEncounterDescriptionTemplate" virtual="true">
+        <Frames>
+            <SimpleHTML parentKey="Text" setAllPoints="true" inherits="InlineHyperlinkFrameTemplate">
+                <FontString inherits="GameFontBlack" justifyH="LEFT" justifyV="TOP">
+                    <Color r="0.25" g="0.1484375" b=".02" a="1"/>
+                </FontString>
+                <Scripts>
+                    <OnHyperlinkEnter function="AbsoReadEncounterJournal_OnHyperlinkEnter"/>
+                </Scripts>
+            </SimpleHTML>
+        </Frames>
+    </Frame>
+    
+    
+    <!--<Button name="AbsoLeadEncounterCreatureButtonTemplate" motionScriptsWhileDisabled="true" virtual="true" hidden="true">
         <Size x="64" y="61"/>
         <Layers>
             <Layer level="BACKGROUND" textureSubLevel="6">
@@ -395,8 +394,8 @@
                 GameTooltip:Hide();
             </OnLeave>
         </Scripts>
-    </Button>
-    <Button name="EJButtonTemplate" virtual="true">
+    </Button>-->
+    <Button name="AbsoLeadEJButtonTemplate" virtual="true">
         <Size x="75" y="26"/>
         <HitRectInsets>
             <AbsInset left="-13" right="-13" top="0" bottom="0"/>
@@ -488,7 +487,7 @@
             </OnMouseUp>
         </Scripts>
     </Button>
-    <Button name="EncounterBossButtonTemplate" virtual="true" hidden="true">
+    <Button name="AbsoLeadEncounterBossButtonTemplate" virtual="true" hidden="true">
         <Size x="325" y="55"/>
         <Frames>
             <Frame>
@@ -550,14 +549,14 @@
             </OnClick>
         </Scripts>
     </Button>
-    <Button name="EncounterTabTemplate" virtual="true">
+    <Button name="AbsoLeadEncounterTabTemplate" virtual="true">
         <Size x="63" y="57"/>
         <NormalTexture inherits="UI-EJ-Tab-UnSelected"/>
         <PushedTexture inherits="UI-EJ-Tab-Selected"/>
         <DisabledTexture inherits="UI-EJ-Tab-UnSelected"/>
         <HighlightTexture inherits="UI-EJ-Tab-Highlight" alphaMode="ADD"/>
         <Scripts>
-            <OnClick function="EncounterJournal_TabClicked"/>
+            <OnClick function="AbsoLeadEncounterJournal_TabClicked"/>
             <OnEnter>
                 GameTooltip:SetOwner(self, "ANCHOR_CURSOR_RIGHT");
                 GameTooltip:SetText(self.tooltip, nil, nil, nil, nil, true);
@@ -749,22 +748,22 @@
                             </Layer>
                         </Layers>
                     </Frame>
-                    <Frame name="$parentIcon1" inherits="EncounterSectionIconTemplate" parentKey="icon1" parentArray="icons">
+                    <Frame name="$parentIcon1" inherits="AbsoLeadEncounterSectionIconTemplate" parentKey="icon1" parentArray="icons">
                         <Anchors>
                             <Anchor point="RIGHT" x="5" y="0"/>
                         </Anchors>
                     </Frame>
-                    <Frame name="$parentIcon2" inherits="EncounterSectionIconTemplate" parentKey="icon2" parentArray="icons">
+                    <Frame name="$parentIcon2" inherits="AbsoLeadEncounterSectionIconTemplate" parentKey="icon2" parentArray="icons">
                         <Anchors>
                             <Anchor point="RIGHT" relativeTo="$parentIcon1" relativePoint="LEFT" x="10" y="0"/>
                         </Anchors>
                     </Frame>
-                    <Frame name="$parentIcon3" inherits="EncounterSectionIconTemplate" parentKey="icon3" parentArray="icons">
+                    <Frame name="$parentIcon3" inherits="AbsoLeadEncounterSectionIconTemplate" parentKey="icon3" parentArray="icons">
                         <Anchors>
                             <Anchor point="RIGHT" relativeTo="$parentIcon2" relativePoint="LEFT" x="10" y="0"/>
                         </Anchors>
                     </Frame>
-                    <Frame name="$parentIcon4" inherits="EncounterSectionIconTemplate" parentKey="icon4" parentArray="icons">
+                    <Frame name="$parentIcon4" inherits="AbsoLeadEncounterSectionIconTemplate" parentKey="icon4" parentArray="icons">
                         <Anchors>
                             <Anchor point="RIGHT" relativeTo="$parentIcon3" relativePoint="LEFT" x="19" y="0"/>
                         </Anchors>
@@ -868,13 +867,13 @@
                     </OnLeave>
                 </Scripts>
             </Button>
-            <Frame parentKey="overviewDescription" inherits="EncounterDescriptionTemplate">
+            <Frame parentKey="overviewDescription" inherits="AbsoLeadEncounterDescriptionTemplate">
                 <Size x="95" y="10"/>
                 <Anchors>
                     <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parentHeaderButton" x="0" y="-9"/>
                 </Anchors>
             </Frame>
-            <Frame inherits="EncounterOverviewBulletTemplate">
+            <Frame inherits="AbsoLeadEncounterOverviewBulletTemplate">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentHeaderButton" x="13" y="-9"/>
                 </Anchors>
@@ -910,7 +909,7 @@
             <OnHide>
                 self:SetScript("OnUpdate", nil);
             </OnHide>
-            <OnHyperlinkEnter function="EncounterJournal_OnHyperlinkEnter"/>
+            <OnHyperlinkEnter function="AbsoReadEncounterJournal_OnHyperlinkEnter"/>
         </Scripts>
     </Frame>
     <Frame name="AbsoLeadEncounterJournal" inherits="PortraitFrameTemplate" toplevel="true" enableMouse="true" parent="UIParent" hidden="false">
@@ -963,64 +962,65 @@
                             </Layer>
                         </Layers>
                         <Frames>
-                            <Button name="$parentMapButton" hidden="true"  parentKey="mapButton">
-                                <Size x="48" y="32"/>
-                                <Anchors>
-                                    <Anchor point="BOTTOMLEFT" x="33" y="126"/>
-                                </Anchors>
-                                <Layers>
-                                    <Layer level="BACKGROUND">
-                                        <Texture name="$parentShadow" inherits="UI-EJ-ShowMapBG">
-                                            <Anchors>
-                                                <Anchor point="LEFT" x="-3" y="5"/>
-                                            </Anchors>
-                                        </Texture>
-                                    </Layer>
-                                    <Layer level="ARTWORK">
-                                        <FontString name="$parentText" font="GameFontNormal" justifyH="LEFT" text="ENCOUNTER_JOURNAL_SHOW_MAP">
-                                            <Size x="0" y="0"/>
-                                            <Anchors>
-                                                <Anchor point="LEFT" relativePoint="RIGHT" x="2" y="0"/>
-                                            </Anchors>
-                                        </FontString>
-                                        <Texture name="$parentTexture" file="Interface\QuestFrame\UI-QuestMap_Button" parentKey="texture">
-                                            <Size x="48" y="32"/>
-                                            <Anchors>
-                                                <Anchor point="RIGHT"/>
-                                            </Anchors>
-                                            <TexCoords left="0.125" right="0.875" top="0.0" bottom="0.5"/>
-                                        </Texture>
-                                    </Layer>
-                                    <Layer level="HIGHLIGHT">
-                                        <Texture name="$parentHighlight" file="Interface\BUTTONS\ButtonHilight-Square" alphaMode="ADD">
-                                            <Size x="36" y="25"/>
-                                            <Anchors>
-                                                <Anchor point="RIGHT" x="-7" y="0"/>
-                                            </Anchors>
-                                        </Texture>
-                                    </Layer>
-                                </Layers>
-                                <Scripts>
-                                    <OnClick>
-                                        local _, _, _, _, _, _, dungeonAreaMapID = EJ_GetInstanceInfo();
-                                        if dungeonAreaMapID and dungeonAreaMapID > 0 then
-                                        WorldMapFrame.fromJournal = true;
-                                        ShowUIPanel(WorldMapFrame);
-                                        SetMapByID(dungeonAreaMapID);
-                                        end
-                                    </OnClick>
-                                    <OnMouseDown>
-                                        self.texture:SetTexCoord(0.125, 0.875, 0.5, 1.0);
-                                    </OnMouseDown>
-                                    <OnMouseUp>
-                                        self.texture:SetTexCoord(0.125, 0.875, 0.0, 0.5);
-                                    </OnMouseUp>
-                                </Scripts>
-                            </Button>
+                            <!--<Button name="$parentMapButton" hidden="true"  parentKey="mapButton">
+                                                            <Size x="48" y="32"/>
+                                                            <Anchors>
+                                                                <Anchor point="BOTTOMLEFT" x="33" y="126"/>
+                                                            </Anchors>
+                                                            <Layers>
+                                                                <Layer level="BACKGROUND">
+                                                                    <Texture name="$parentShadow" inherits="UI-EJ-ShowMapBG">
+                                                                        <Anchors>
+                                                                            <Anchor point="LEFT" x="-3" y="5"/>
+                                                                        </Anchors>
+                                                                    </Texture>
+                                                                </Layer>
+                                                                <Layer level="ARTWORK">
+                                                                    <FontString name="$parentText" font="GameFontNormal" justifyH="LEFT" text="ENCOUNTER_JOURNAL_SHOW_MAP">
+                                                                        <Size x="0" y="0"/>
+                                                                        <Anchors>
+                                                                            <Anchor point="LEFT" relativePoint="RIGHT" x="2" y="0"/>
+                                                                        </Anchors>
+                                                                    </FontString>
+                                                                    <Texture name="$parentTexture" file="Interface\QuestFrame\UI-QuestMap_Button" parentKey="texture">
+                                                                        <Size x="48" y="32"/>
+                                                                        <Anchors>
+                                                                            <Anchor point="RIGHT"/>
+                                                                        </Anchors>
+                                                                        <TexCoords left="0.125" right="0.875" top="0.0" bottom="0.5"/>
+                                                                    </Texture>
+                                                                </Layer>
+                                                                <Layer level="HIGHLIGHT">
+                                                                    <Texture name="$parentHighlight" file="Interface\BUTTONS\ButtonHilight-Square" alphaMode="ADD">
+                                                                        <Size x="36" y="25"/>
+                                                                        <Anchors>
+                                                                            <Anchor point="RIGHT" x="-7" y="0"/>
+                                                                        </Anchors>
+                                                                    </Texture>
+                                                                </Layer>
+                                                            </Layers>
+                                                            <Scripts>
+                                                                <OnClick>
+                                                                    local _, _, _, _, _, _, dungeonAreaMapID = EJ_GetInstanceInfo();
+                                                                    if dungeonAreaMapID and dungeonAreaMapID > 0 then
+                                                                    WorldMapFrame.fromJournal = true;
+                                                                    ShowUIPanel(WorldMapFrame);
+                                                                    SetMapByID(dungeonAreaMapID);
+                                                                    end
+                                                                </OnClick>
+                                                                <OnMouseDown>
+                                                                    self.texture:SetTexCoord(0.125, 0.875, 0.5, 1.0);
+                                                                </OnMouseDown>
+                                                                <OnMouseUp>
+                                                                    self.texture:SetTexCoord(0.125, 0.875, 0.0, 0.5);
+                                                                </OnMouseUp>
+                                                            </Scripts>
+                                                        </Button>
+                            -->                            
                             <ScrollFrame name="$parentLoreScrollFrame" parentKey="loreScroll" inherits="UIPanelScrollFrameCodeTemplate">
-                                <Size x="315" y="102"/>
+                                <Size x="315" y="302"/>
                                 <Anchors>
-                                    <Anchor point="TOP" x="0" y="-150"/>
+                                    <Anchor point="BOTTOM" x="0" y="0"/>
                                 </Anchors>
                                 <Frames>
                                     <Slider name="$parentScrollBar" inherits="MinimalScrollBarTemplate" parentKey="ScrollBar">
@@ -1161,7 +1161,7 @@
                                     </Frame>
                                 </ScrollChild>
                             </ScrollFrame>
-                            <Button name="$parentDifficulty" hidden="true" parentKey="difficulty" inherits="EJButtonTemplate" frameLevel="10">
+                            <Button name="$parentTellStrat" hidden="false" parentKey="sendstrat" inherits="AbsoLeadEJButtonTemplate" frameLevel="10" text="Send">
                                 <Size x="75" y="26"/>
                                 <Anchors>
                                     <Anchor point="TOPRIGHT" x="-19" y="-13"/>
@@ -1180,7 +1180,7 @@
                                     </OnLoad>
                                 </Scripts>
                             </Frame>
-                            <Button name="$parentResetButton" parentKey="reset" hidden="true">
+                            <!--<Button name="$parentResetButton" parentKey="reset" hidden="true">
                                 <Size x="26" y="26"/>
                                 <Anchors>
                                     <Anchor point="RIGHT" relativeTo="$parentDifficulty" relativePoint="LEFT" x="-10" y="0"/>
@@ -1213,7 +1213,7 @@
                                         GameTooltip:Hide();
                                     </OnLeave>
                                 </Scripts>
-                            </Button>
+                            </Button>-->
                             <ScrollFrame name="$parentDetailsScrollFrame" parentKey="detailsScroll" inherits="UIPanelScrollFrameCodeTemplate">
                                 <Size x="350" y="383"/>
                                 <Anchors>
@@ -1285,22 +1285,22 @@
                                                     </Anchors>
                                                     <Color r="0.25" g="0.1484375" b=".02" a="1"/>
                                                 </FontString>
-                                                <Texture name="$parentHeader" inherits="UI-EJ-Header-Overview" parentKey="header">
+                                                <Texture name="$parentHeader" parentKey="header">
                                                     <Anchors>
                                                         <Anchor point="TOP" relativeKey="$parent.loreDescription" relativePoint="BOTTOM" x="0" y="-6"/>
                                                     </Anchors>
                                                 </Texture>
-                                                <!--<FontString name="$parentTitle" inherits="GameFontNormal" justifyH="LEFT" text="OVERVIEW">
+                                                <FontString name="$parentTitle" inherits="GameFontNormal" justifyH="LEFT" text="OVERVIEW">
                                                     <Size x="200" y="10"/>
                                                     <Anchors>
                                                         <Anchor point="BOTTOMLEFT" relativeKey="$parent.header" relativePoint="BOTTOMLEFT" x="8" y="6"/>
                                                     </Anchors>
                                                     <Color r="0.929" g="0.788" b="0.620"/>
-                                                </FontString>-->
+                                                </FontString>
                                             </Layer>
                                         </Layers>
                                         <Frames>
-                                            <Frame parentKey="overviewDescription" inherits="EncounterDescriptionTemplate">
+                                            <Frame parentKey="overviewDescription" inherits="AbsoLeadEncounterDescriptionTemplate">
                                                 <Size x="95" y="10"/>
                                                 <Anchors>
                                                     <Anchor point="TOP" relativeKey="$parent.header" relativePoint="BOTTOM" x="0" y="-6"/>
@@ -1379,7 +1379,7 @@
                                             </Button>
                                         </Frames>
                                     </Frame>
-                                    <Button name="$parentFilterToggle" hidden="true" parentKey="filter" text="GEAR_FILTER" inherits="EJButtonTemplate">
+                                    <Button name="$parentFilterToggle" hidden="true" parentKey="filter" text="GEAR_FILTER" inherits="AbsoLeadEJButtonTemplate">
                                         <Scripts>
                                             <OnClick>
                                                 ToggleDropDownMenu(1, nil, self:GetParent().lootFilter, self, 5, 0);
@@ -1390,7 +1390,7 @@
                                             </OnLoad>
                                         </Scripts>
                                     </Button>
-                                    <Button name="$parentSlotFilterToggle" hidden="true"  parentKey="slotFilter" text="ALL_INVENTORY_SLOTS" inherits="EJButtonTemplate">
+                                    <Button name="$parentSlotFilterToggle" hidden="true"  parentKey="slotFilter" text="ALL_INVENTORY_SLOTS" inherits="AbsoLeadEJButtonTemplate">
                                         <Anchors>
                                             <Anchor point="LEFT" relativeKey="$parent.filter" relativePoint="RIGHT" x="10" y="0"/>
                                         </Anchors>
@@ -1420,7 +1420,7 @@
                                     </Slider>
                                 </Frames>
                             </ScrollFrame>
-                            <ModelScene name="$parentModelFrame" parentKey="model" inherits="ModelSceneMixinTemplate">
+                            <ModelScene name="$parentModelFrame" hidden="true" parentKey="model" inherits="ModelSceneMixinTemplate">
                                 <Size x="390" y="423"/>
                                 <Anchors>
                                     <Anchor point="BOTTOMRIGHT" x="-3" y="1"/>
@@ -1488,18 +1488,18 @@
                                     
                                 </Scripts>
                             </ModelScene>
-                            <Button name="$parentCreatureButton1" inherits="EncounterCreatureButtonTemplate" parentArray="creatureButtons">
+                            <!--  <Button name="$parentCreatureButton1" inherits="AbsoLeadEncounterCreatureButtonTemplate" parentArray="creatureButtons">
                                 <Anchors>
                                     <Anchor point="TOPLEFT" relativeTo="$parentModelFrame" x="3" y="-35"/>
                                 </Anchors>
-                            </Button>
+                            </Button>-->
                         </Frames>
                     </Frame>
                 </Frames>
                 <Scripts>
                     <OnLoad>AbsoLead_OnLoad(self)</OnLoad>						
-                    <OnEvent>AbsoLead_OnEvent(self, event, ...)</OnEvent>						
-                    <OnUpdate>AbsoLead_OnUpdate(self)</OnUpdate>
+                    <!--   <OnEvent>AbsoLead_OnEvent(self, event, ...)</OnEvent>						
+                    <OnUpdate>AbsoLead_OnUpdate(self)</OnUpdate>-->
                 </Scripts>
             </Frame>
         </Frames>

@@ -12,15 +12,34 @@ end
 
 local EJ_LORE_MAX_HEIGHT = 197;
 function AbsoLead_DisplayEncounter(encounterID)
-    local self = AbsoLeadEncounterJournal.encounter;
+    local self = AbsoLeadEncounterJournal.encounter;   
     AbsoLead_CleanUI();
+    local ename, description, _, rootSectionID = EJ_GetEncounterInfo(encounterID);
+    self.overviewFrame:Show(); 
+    self.info.encounterTitle:Show();
+    self.info.encounterTitle:SetText(ename);
+    
+    self.info.sendstrat:Show();
     EJ_SelectEncounter(encounterID);
     if (strat[encounterID]) then
-        --print("cool");
-        self.overviewFrame.loreDescription:SetText(strat[encounterID][0]);
-    end
+        --print("cool",description);
+        self.overviewFrame.loreDescription:SetText(strat[encounterID][0]); 
+        print("ll", self.overviewFrame.loreDescription:GetText());
+       -- self.overviewFrame.loreDescription:SetFont('Fonts\\FRIZQT__.TTF', 11);
+        self.overviewFrame.loreDescription:SetWidth(self.overviewFrame:GetWidth() - 5);
+        --self.overviewFrame:Click();
+        --   self.overviewFrame.loreDescription:SetHyperlinksEnabled(true);
+    end  
+    self.info.overviewScroll:Show();
 end
-
+function AbsoReadEncounterJournal_OnHyperlinkEnter(self, link, text, fontString, left, bottom, width, height)
+    print("samuit");
+    self.tooltipFrame:SetOwner(self, "ANCHOR_PRESERVE");
+    
+    self.tooltipFrame:ClearAllPoints();
+    self.tooltipFrame:SetPoint("BOTTOMLEFT", fontString, "TOPLEFT", left + width, bottom);
+    self.tooltipFrame:SetHyperlink(link, EJ_GetDifficulty());
+end
 function AbsoLeadEncounterJournalInstanceButton_OnClick(self)
     --NavBar_Reset(EncounterJournal.navBar);
     local instanceID = 946
@@ -28,9 +47,11 @@ function AbsoLeadEncounterJournalInstanceButton_OnClick(self)
 end
 
 function AbsoLead_OnLoad(self) 
+    self:RegisterEvent("PLAYER_LOGIN");
     self.bossesFrame = self.info.bossesScroll.child;
     self.overviewFrame = self.info.overviewScroll.child;
     AbsoLead_CleanUI();
+    
     AbsoLeadEncounterJournalTitleText:SetText("Abso Lead");
     SetPortraitToTexture(AbsoLeadEncounterJournalPortrait,"Interface\\EncounterJournal\\UI-EJ-PortraitIcon");
     AbsoLead_DisplayInstance(946);
@@ -38,15 +59,21 @@ end
 
 function AbsoLead_CleanUI() 
     local self = AbsoLeadEncounterJournal.encounter;
-    self.instance.titleBG:Show();
+    self.instance.titleBG:Show(); 
+    self.info.encounterTitle:Hide();
     self.overviewFrame.loreDescription:SetText('');
-    self.instance.mapButton:SetShown(false);    
+    --self.instance.mapButton:SetShown(false);    
     self.instance.title:Hide();
     self.instance.loreBG:Hide();
     self.instance.loreScroll:Hide();
     --self.instance.loreBG:SetTexture(loreImage);
     self.instance.loreBG:Hide();
     self.instance.titleBG:Hide();
+    self.info.overviewScroll:Hide();
+    self.info.detailsScroll:Hide();
+    self.info.lootScroll:Hide();
+    self.info.sendstrat:Hide();
+    self.info.rightShadow:Hide();
 end
 function AbsoLead_DisplayInstance(instanceID)
     
@@ -57,7 +84,7 @@ function AbsoLead_DisplayInstance(instanceID)
     self.instance.title:SetText(iname); 
     self.instance.titleBG:SetWidth(self.instance.title:GetStringWidth() + 80);
     --self.instance.loreBG:SetTexture(loreImage);
-    self.instance.loreBG:Show();   
+    -- self.instance.loreBG:Show();   
     self.instance.loreScroll:Show();
     self.info.instanceTitle:SetText(iname);
     self.instance.titleBG:Show();
@@ -86,7 +113,7 @@ function AbsoLead_DisplayInstance(instanceID)
             --print("--description",description);
             bossButton = _G["AbsoLeadEncounterJournalBossButton"..j];
             if not bossButton then -- create a new header;
-                bossButton = CreateFrame("BUTTON","AbsoLeadEncounterJournalBossButton"..j, AbsoLeadEncounterJournal.encounter.bossesFrame, "EncounterBossButtonTemplate");
+                bossButton = CreateFrame("BUTTON","AbsoLeadEncounterJournalBossButton"..j, AbsoLeadEncounterJournal.encounter.bossesFrame, "AbsoLeadEncounterBossButtonTemplate");
                 if j > 1 then
                     bossButton:SetPoint("TOPLEFT", _G["AbsoLeadEncounterJournalBossButton"..(j-1)], "BOTTOMLEFT", 0, -15);
                 else
@@ -108,7 +135,8 @@ function AbsoLead_DisplayInstance(instanceID)
             end
         end
         j = j+1
-    end
+    end 
+    
 --[[local name, description, bossID, rootSectionID, link = EJ_GetEncounterInfoByIndex(bossIndex);
     local i = 1
     while EJ_GetInstanceByIndex(i, true) do
