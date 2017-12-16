@@ -6,16 +6,23 @@ SLASH_ABSOLEAD1 = '/absolead'
 
 SlashCmdList["ABSOLEAD"] = AbsoleadSlash 
 
-
+local strat = {};
 function AbsoLead_OnEvent(self, event, ...)
+    if (event == "PLAYER_ENTERING_WORLD") then
+        strat = createStrat();
+        local instanceID = 946;
+        AbsoLead_DisplayInstance(instanceID);
+    end
 end
 
 local EJ_LORE_MAX_HEIGHT = 197;
 function AbsoLead_DisplayEncounter(encounterID)
     local self = AbsoLeadEncounterJournal.encounter;   
+    -- local bossListScrollValue = self.info.bossesScroll.ScrollBar:GetValue()
     AbsoLead_CleanUI();
+    -- AbsoLead_DisplayEncounter.encounter.info.bossesScroll.ScrollBar:SetValue(bossListScrollValue)
+    
     local ename, description, _, rootSectionID = EJ_GetEncounterInfo(encounterID);
-    self.overviewFrame:Show(); 
     self.info.encounterTitle:Show();
     self.info.encounterTitle:SetText(ename);
     
@@ -23,14 +30,19 @@ function AbsoLead_DisplayEncounter(encounterID)
     EJ_SelectEncounter(encounterID);
     if (strat[encounterID]) then
         --print("cool",description);
-        self.overviewFrame.loreDescription:SetText(strat[encounterID][0]); 
-        print("ll", self.overviewFrame.loreDescription:GetText());
-       -- self.overviewFrame.loreDescription:SetFont('Fonts\\FRIZQT__.TTF', 11);
+        local description = strat[encounterID][0];
+        self.overviewFrame.loreDescription:SetHeight(0);
         self.overviewFrame.loreDescription:SetWidth(self.overviewFrame:GetWidth() - 5);
-        --self.overviewFrame:Click();
-        --   self.overviewFrame.loreDescription:SetHyperlinksEnabled(true);
+        
+        self.overviewFrame.loreDescription:SetText(description);
+        
     end  
-    self.info.overviewScroll:Show();
+    self.overviewFrame.loreDescription:Show();
+    self.overviewFrame:Show();
+    
+    self:Show();
+    
+    
 end
 function AbsoReadEncounterJournal_OnHyperlinkEnter(self, link, text, fontString, left, bottom, width, height)
     print("samuit");
@@ -47,9 +59,10 @@ function AbsoLeadEncounterJournalInstanceButton_OnClick(self)
 end
 
 function AbsoLead_OnLoad(self) 
-    self:RegisterEvent("PLAYER_LOGIN");
-    self.bossesFrame = self.info.bossesScroll.child;
-    self.overviewFrame = self.info.overviewScroll.child;
+    self:RegisterEvent("PLAYER_ENTERING_WORLD");
+    self.encounter.bossesFrame = self.encounter.info.bossesScroll.child;
+    self.encounter.overviewFrame = self.encounter.info.overviewScroll.child;
+    self.encounter.infoFrame = self.encounter.info.detailsScroll.child;
     AbsoLead_CleanUI();
     
     AbsoLeadEncounterJournalTitleText:SetText("Abso Lead");
@@ -59,26 +72,32 @@ end
 
 function AbsoLead_CleanUI() 
     local self = AbsoLeadEncounterJournal.encounter;
-    self.instance.titleBG:Show(); 
+    self.instance :Hide();
+    self.overviewFrame.loreDescription:Hide();
     self.info.encounterTitle:Hide();
-    self.overviewFrame.loreDescription:SetText('');
+    self.info.sendstrat:Hide();
+    --//self.instance.loreScroll:Hide();
+  --[[  self.instance.titleBG:Show(); 
+    self.info.encounterTitle:Hide();
     --self.instance.mapButton:SetShown(false);    
     self.instance.title:Hide();
-    self.instance.loreBG:Hide();
+   
     self.instance.loreScroll:Hide();
     --self.instance.loreBG:SetTexture(loreImage);
     self.instance.loreBG:Hide();
     self.instance.titleBG:Hide();
     self.info.overviewScroll:Hide();
     self.info.detailsScroll:Hide();
-    self.info.lootScroll:Hide();
+    --self.info.lootScroll:Hide();
     self.info.sendstrat:Hide();
-    self.info.rightShadow:Hide();
+    self.info.rightShadow:Hide();]]--
 end
 function AbsoLead_DisplayInstance(instanceID)
     
     local self = AbsoLeadEncounterJournal.encounter;
     AbsoLead_CleanUI();
+    self:Show();
+    self.instance :Show();
     EJ_SelectInstance(instanceID)
     local iname, description, bgImage, _, loreImage, buttonImage, dungeonAreaMapID = EJ_GetInstanceInfo();
     self.instance.title:SetText(iname); 
@@ -102,7 +121,7 @@ function AbsoLead_DisplayInstance(instanceID)
     self.info.instanceButton.icon:SetMask("Interface\\CharacterFrame\\TempPortraitAlphaMask");
     self.info.instanceButton.icon:SetTexture(buttonImage);
     
-    self.info.model.dungeonBG:SetTexture(bgImage);
+    --self.info.model.dungeonBG:SetTexture(bgImage);
     -- crawl all boss for dungeon
     local j = 1
     local bossButton;
